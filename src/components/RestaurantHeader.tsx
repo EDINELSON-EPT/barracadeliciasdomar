@@ -1,11 +1,22 @@
 import logo from '@/assets/logo.jpg';
+import TableSelector from './TableSelector';
+import { TableOrder } from '@/hooks/useOrder';
 
 interface RestaurantHeaderProps {
-  tableNumber: string;
-  onTableChange: (table: string) => void;
+  tables: TableOrder[];
+  activeTableIndex: number | null;
+  onSelectTable: (index: number) => void;
+  onAddTable: (tableNumber: string) => void;
+  onRemoveTable: (index: number) => void;
 }
 
-const RestaurantHeader = ({ tableNumber, onTableChange }: RestaurantHeaderProps) => {
+const RestaurantHeader = ({ 
+  tables, 
+  activeTableIndex, 
+  onSelectTable, 
+  onAddTable,
+  onRemoveTable 
+}: RestaurantHeaderProps) => {
   return (
     <header className="bg-background sticky top-0 z-10 px-4 py-6">
       {/* Logo */}
@@ -28,22 +39,14 @@ const RestaurantHeader = ({ tableNumber, onTableChange }: RestaurantHeaderProps)
       <div className="w-32 h-1 bg-gold mx-auto mt-3 rounded-full" />
       
       {/* Table selector */}
-      <div className="flex items-center justify-center gap-4 mt-5">
-        <button 
-          onClick={() => {
-            const newTable = prompt('Digite o número da mesa:', tableNumber);
-            if (newTable !== null) onTableChange(newTable);
-          }}
-          className="text-sm font-medium text-gold-light hover:text-gold transition-colors"
-        >
-          ADICIONAR MESA +
-        </button>
-        
-        {tableNumber && (
-          <div className="bg-card px-4 py-2 rounded-full shadow-md border border-gold">
-            <span className="text-sm font-bold text-gold">MESA # {tableNumber}</span>
-          </div>
-        )}
+      <div className="mt-5">
+        <TableSelector
+          tables={tables}
+          activeTableIndex={activeTableIndex}
+          onSelectTable={onSelectTable}
+          onAddTable={onAddTable}
+          onRemoveTable={onRemoveTable}
+        />
       </div>
     </header>
   );
