@@ -1,4 +1,4 @@
-import { Fish } from 'lucide-react';
+import logo from '@/assets/logo.jpg';
 
 interface RestaurantHeaderProps {
   tableNumber: string;
@@ -10,8 +10,12 @@ const RestaurantHeader = ({ tableNumber, onTableChange }: RestaurantHeaderProps)
     <header className="bg-sand sticky top-0 z-10 px-4 py-6">
       {/* Logo */}
       <div className="flex justify-center mb-4">
-        <div className="w-20 h-20 bg-card rounded-full flex items-center justify-center shadow-lg">
-          <Fish className="w-12 h-12 text-gold" strokeWidth={1.5} />
+        <div className="w-24 h-24 rounded-full overflow-hidden shadow-lg bg-card">
+          <img 
+            src={logo} 
+            alt="Barraca Delícias do Mar" 
+            className="w-full h-full object-cover"
+          />
         </div>
       </div>
       
