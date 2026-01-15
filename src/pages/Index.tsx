@@ -13,9 +13,13 @@ const Index = () => {
   const sectionRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
   
   const {
+    tables,
+    activeTableIndex,
+    activeTable,
     orderItems,
-    tableNumber,
-    setTableNumber,
+    addTable,
+    removeTable,
+    selectTable,
     addItem,
     removeItem,
     deleteItem,
@@ -26,7 +30,7 @@ const Index = () => {
     setActiveCategory(categoryId);
     const element = sectionRefs.current[categoryId];
     if (element) {
-      const headerOffset = 280;
+      const headerOffset = 320;
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
       
@@ -47,7 +51,7 @@ const Index = () => {
           }
         });
       },
-      { rootMargin: '-300px 0px -50% 0px' }
+      { rootMargin: '-340px 0px -50% 0px' }
     );
 
     Object.values(sectionRefs.current).forEach((ref) => {
@@ -57,11 +61,16 @@ const Index = () => {
     return () => observer.disconnect();
   }, []);
 
+  const canAddItems = activeTableIndex !== null;
+
   return (
     <div className="min-h-screen bg-background pb-24">
-      <RestaurantHeader
-        tableNumber={tableNumber} 
-        onTableChange={setTableNumber} 
+      <RestaurantHeader 
+        tables={tables}
+        activeTableIndex={activeTableIndex}
+        onSelectTable={selectTable}
+        onAddTable={addTable}
+        onRemoveTable={removeTable}
       />
       
       <CategoryTabs 
@@ -69,6 +78,14 @@ const Index = () => {
         activeCategory={activeCategory}
         onCategoryChange={handleCategoryChange}
       />
+
+      {!canAddItems && (
+        <div className="mx-4 mt-4 p-4 bg-card rounded-xl border border-gold/30 text-center">
+          <p className="text-gold-burnt text-sm">
+            👆 Adicione uma mesa para começar o pedido
+          </p>
+        </div>
+      )}
       
       <main className="px-4 py-4 space-y-8">
         {menuData.map((category) => (
@@ -88,6 +105,7 @@ const Index = () => {
                   key={item.id} 
                   item={item} 
                   onAdd={addItem}
+                  disabled={!canAddItems}
                 />
               ))}
             </div>
@@ -95,17 +113,22 @@ const Index = () => {
         ))}
       </main>
       
-      <BottomTotal total={total} />
-      
-      <OrderSummary
-        items={orderItems}
-        total={total}
-        onAdd={addItem}
-        onRemove={removeItem}
-        onDelete={deleteItem}
-        isOpen={isOrderOpen}
-        onToggle={() => setIsOrderOpen(!isOrderOpen)}
-      />
+      {canAddItems && (
+        <>
+          <BottomTotal total={total} tableNumber={activeTable?.tableNumber} />
+          
+          <OrderSummary
+            items={orderItems}
+            total={total}
+            tableNumber={activeTable?.tableNumber}
+            onAdd={addItem}
+            onRemove={removeItem}
+            onDelete={deleteItem}
+            isOpen={isOrderOpen}
+            onToggle={() => setIsOrderOpen(!isOrderOpen)}
+          />
+        </>
+      )}
     </div>
   );
 };

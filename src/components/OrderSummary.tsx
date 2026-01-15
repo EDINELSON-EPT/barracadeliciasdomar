@@ -4,6 +4,7 @@ import { OrderItem } from '@/hooks/useOrder';
 interface OrderSummaryProps {
   items: OrderItem[];
   total: number;
+  tableNumber?: string;
   onAdd: (item: OrderItem) => void;
   onRemove: (itemId: string) => void;
   onDelete: (itemId: string) => void;
@@ -11,7 +12,7 @@ interface OrderSummaryProps {
   onToggle: () => void;
 }
 
-const OrderSummary = ({ items, total, onAdd, onRemove, onDelete, isOpen, onToggle }: OrderSummaryProps) => {
+const OrderSummary = ({ items, total, tableNumber, onAdd, onRemove, onDelete, isOpen, onToggle }: OrderSummaryProps) => {
   const formatPrice = (price: number) => {
     return `R$ ${price.toFixed(2).replace('.', ',')}`;
   };
@@ -39,7 +40,10 @@ const OrderSummary = ({ items, total, onAdd, onRemove, onDelete, isOpen, onToggl
           {/* Handle */}
           <button onClick={onToggle} className="w-12 h-1 bg-gold/50 rounded-full mx-auto mb-4" />
           
-          <h2 className="text-lg font-bold text-gold mb-4">Seu Pedido</h2>
+          <h2 className="text-lg font-bold text-gold mb-1">Seu Pedido</h2>
+          {tableNumber && (
+            <p className="text-gold-burnt text-sm mb-4">Mesa #{tableNumber}</p>
+          )}
           
           {items.length === 0 ? (
             <p className="text-muted-foreground text-center py-8">
@@ -87,7 +91,7 @@ const OrderSummary = ({ items, total, onAdd, onRemove, onDelete, isOpen, onToggl
         {/* Total footer */}
         <div className="bg-brown-dark border-t border-gold p-4 rounded-t-2xl">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-primary-foreground font-medium">TOTAL:</span>
+            <span className="text-foreground font-medium">TOTAL:</span>
             <span className="text-gold text-2xl font-bold">{formatPrice(total)}</span>
           </div>
           <p className="text-gold-burnt text-xs text-center">
