@@ -47,20 +47,18 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // Custom restaurant colors
-        sand: {
-          DEFAULT: "hsl(var(--sand))",
-          light: "hsl(var(--sand-light))",
-        },
-        navy: {
-          DEFAULT: "hsl(var(--navy))",
-          light: "hsl(var(--navy-light))",
+        // Premium restaurant colors
+        brown: {
+          dark: "hsl(var(--brown-dark))",
+          chocolate: "hsl(var(--brown-chocolate))",
+          coffee: "hsl(var(--brown-coffee))",
         },
         gold: {
-          DEFAULT: "hsl(var(--gold))",
+          DEFAULT: "hsl(var(--gold-main))",
           light: "hsl(var(--gold-light))",
+          burnt: "hsl(var(--gold-burnt))",
         },
-        ocean: "hsl(var(--ocean))",
+        "black-brown": "hsl(var(--black-brown))",
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",

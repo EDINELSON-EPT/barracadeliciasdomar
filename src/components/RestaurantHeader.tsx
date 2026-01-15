@@ -7,10 +7,10 @@ interface RestaurantHeaderProps {
 
 const RestaurantHeader = ({ tableNumber, onTableChange }: RestaurantHeaderProps) => {
   return (
-    <header className="bg-sand sticky top-0 z-10 px-4 py-6">
+    <header className="bg-background sticky top-0 z-10 px-4 py-6">
       {/* Logo */}
       <div className="flex justify-center mb-4">
-        <div className="w-24 h-24 rounded-full overflow-hidden shadow-lg bg-card">
+        <div className="w-24 h-24 rounded-full overflow-hidden shadow-lg border-2 border-gold">
           <img 
             src={logo} 
             alt="Barraca Delícias do Mar" 
@@ -20,7 +20,7 @@ const RestaurantHeader = ({ tableNumber, onTableChange }: RestaurantHeaderProps)
       </div>
       
       {/* Title */}
-      <h1 className="text-2xl font-bold text-center text-navy tracking-wide">
+      <h1 className="text-2xl font-bold text-center text-gold tracking-wide">
         BARRACA DELÍCIAS DO MAR
       </h1>
       
@@ -34,14 +34,14 @@ const RestaurantHeader = ({ tableNumber, onTableChange }: RestaurantHeaderProps)
             const newTable = prompt('Digite o número da mesa:', tableNumber);
             if (newTable !== null) onTableChange(newTable);
           }}
-          className="text-sm font-medium text-navy hover:text-gold transition-colors"
+          className="text-sm font-medium text-gold-light hover:text-gold transition-colors"
         >
           ADICIONAR MESA +
         </button>
         
         {tableNumber && (
-          <div className="bg-card px-4 py-2 rounded-full shadow-md border border-border">
-            <span className="text-sm font-bold text-navy">MESA # {tableNumber}</span>
+          <div className="bg-card px-4 py-2 rounded-full shadow-md border border-gold">
+            <span className="text-sm font-bold text-gold">MESA # {tableNumber}</span>
           </div>
         )}
       </div>

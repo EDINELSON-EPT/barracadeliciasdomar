@@ -58,8 +58,8 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-sand pb-24">
-      <RestaurantHeader 
+    <div className="min-h-screen bg-background pb-24">
+      <RestaurantHeader
         tableNumber={tableNumber} 
         onTableChange={setTableNumber} 
       />
@@ -77,7 +77,7 @@ const Index = () => {
             id={category.id}
             ref={(el: HTMLDivElement | null) => { sectionRefs.current[category.id] = el; }}
           >
-            <h2 className="text-xl font-bold text-navy mb-4 flex items-center gap-2">
+            <h2 className="text-xl font-bold text-gold mb-4 flex items-center gap-2">
               <span>{category.icon}</span>
               {category.name}
             </h2>
