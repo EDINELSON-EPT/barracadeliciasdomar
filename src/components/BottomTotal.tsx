@@ -1,15 +1,20 @@
 interface BottomTotalProps {
   total: number;
+  tableFee: number;
   tableNumber?: string;
 }
 
-const BottomTotal = ({ total, tableNumber }: BottomTotalProps) => {
+const BottomTotal = ({ total, tableFee, tableNumber }: BottomTotalProps) => {
   const formatPrice = (price: number) => {
     return `R$ ${price.toFixed(2).replace('.', ',')}`;
   };
 
   return (
     <div className="fixed bottom-0 left-0 right-0 bg-brown-dark border-t border-gold p-4 z-10">
+      <div className="flex items-center justify-between text-xs text-gold-burnt mb-1">
+        <span>Taxa da mesa</span>
+        <span>{formatPrice(tableFee)}</span>
+      </div>
       <div className="flex items-center justify-between">
         <div>
           <span className="text-foreground font-medium">TOTAL</span>
