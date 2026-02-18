@@ -1,7 +1,11 @@
-import { MenuCategory } from '@/data/menuData';
+interface CategoryItem {
+  id: string;
+  name: string;
+  icon: string;
+}
 
 interface CategoryTabsProps {
-  categories: MenuCategory[];
+  categories: CategoryItem[];
   activeCategory: string;
   onCategoryChange: (categoryId: string) => void;
 }
