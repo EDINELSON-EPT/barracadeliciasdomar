@@ -19,9 +19,15 @@ const TableSelector = ({
   
   const handleAddTable = () => {
     const tableNumber = prompt('Digite o número da nova mesa:');
-    if (tableNumber && tableNumber.trim()) {
-      onAddTable(tableNumber.trim());
+    if (!tableNumber) return;
+    
+    const sanitized = tableNumber.trim();
+    if (!/^[a-zA-Z0-9]{1,10}$/.test(sanitized)) {
+      alert('Número da mesa deve conter apenas letras e números (máximo 10 caracteres)');
+      return;
     }
+    
+    onAddTable(sanitized);
   };
 
   return (
