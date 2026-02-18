@@ -109,7 +109,9 @@ export const useOrder = () => {
     }));
   }, [activeTableIndex]);
 
-  const total = orderItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+  const TABLE_FEE = 20;
+  const subtotal = orderItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+  const total = subtotal + (activeTable ? TABLE_FEE : 0);
 
   return {
     tables,
@@ -123,6 +125,8 @@ export const useOrder = () => {
     removeItem,
     deleteItem,
     clearOrder,
-    total
+    subtotal,
+    total,
+    TABLE_FEE
   };
 };

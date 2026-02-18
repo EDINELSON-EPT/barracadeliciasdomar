@@ -4,6 +4,8 @@ import { OrderItem } from '@/hooks/useOrder';
 interface OrderSummaryProps {
   items: OrderItem[];
   total: number;
+  subtotal: number;
+  tableFee: number;
   tableNumber?: string;
   onAdd: (item: OrderItem) => void;
   onRemove: (itemId: string) => void;
@@ -12,7 +14,7 @@ interface OrderSummaryProps {
   onToggle: () => void;
 }
 
-const OrderSummary = ({ items, total, tableNumber, onAdd, onRemove, onDelete, isOpen, onToggle }: OrderSummaryProps) => {
+const OrderSummary = ({ items, total, subtotal, tableFee, tableNumber, onAdd, onRemove, onDelete, isOpen, onToggle }: OrderSummaryProps) => {
   const formatPrice = (price: number) => {
     return `R$ ${price.toFixed(2).replace('.', ',')}`;
   };
@@ -90,6 +92,10 @@ const OrderSummary = ({ items, total, tableNumber, onAdd, onRemove, onDelete, is
         
         {/* Total footer */}
         <div className="bg-brown-dark border-t border-gold p-4 rounded-t-2xl">
+          <div className="flex items-center justify-between text-xs text-gold-burnt mb-1">
+            <span>Taxa da mesa</span>
+            <span>{formatPrice(tableFee)}</span>
+          </div>
           <div className="flex items-center justify-between mb-2">
             <span className="text-foreground font-medium">TOTAL:</span>
             <span className="text-gold text-2xl font-bold">{formatPrice(total)}</span>

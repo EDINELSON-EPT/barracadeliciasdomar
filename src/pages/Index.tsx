@@ -23,7 +23,9 @@ const Index = () => {
     addItem,
     removeItem,
     deleteItem,
-    total
+    subtotal,
+    total,
+    TABLE_FEE
   } = useOrder();
 
   const handleCategoryChange = (categoryId: string) => {
@@ -115,11 +117,13 @@ const Index = () => {
       
       {canAddItems && (
         <>
-          <BottomTotal total={total} tableNumber={activeTable?.tableNumber} />
+          <BottomTotal total={total} tableFee={TABLE_FEE} tableNumber={activeTable?.tableNumber} />
           
           <OrderSummary
             items={orderItems}
             total={total}
+            subtotal={subtotal}
+            tableFee={TABLE_FEE}
             tableNumber={activeTable?.tableNumber}
             onAdd={addItem}
             onRemove={removeItem}
